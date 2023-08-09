@@ -1,1 +1,1 @@
-git init
+print("Prueba")
