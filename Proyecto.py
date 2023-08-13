@@ -1,65 +1,68 @@
 # Variables de registro
-nombres = []
-n_identificaciones = []
-paises = []
-cantones = []
-distritos = []
-direcciones = []
-edades = []
-formasDePago = []
-hospedajes = []
+Nombre = {}
+Identificacion = {}
+Pais = {}
+Provincia = {}
+Canton = {}
+Distrito = {}
+Direccion = {}
+Edad = {}
+FormaDePago = {}
+Datos_acompañantes = []
+Días_semana = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sabado","Domingo"]
 horarios_checkin = []
 horarios_checkout = []
 # Datos de los hoteles
-hoteles = {
-    "Puntarenas": {
-        "capacidad": 120,
-        "max_huespedes_por_habitacion": 4,
-        "tarifa_semana": 100,
-        "tarifa_fin_de_semana": 120,
-    },
-    "San Carlos": {
-        "capacidad": 60,
-        "max_huespedes_por_habitacion": 2,
-        "tarifa_semana": 80,
-        "tarifa_fin_de_semana": 100,
-    },
-    "Guanacaste": {
-        "capacidad": 100,
-        "max_huespedes_por_habitacion": 4,
-        "tarifa_semana": 90,
-        "tarifa_fin_de_semana": 110,
-    },
-}
+# Puntarenas
+Posicion = 0
+file = open("Hoteles.txt","r")
+Datos = file.read()
+Especificaciones = Datos.split("&")
+for i in Especificaciones:
+    if i == "P,habitaciones":
+        Habitaciones_disponibles_P = Especificaciones[Posicion + 1]
+    if i == "P_espacios_lunes":
+        Lunes_P = Especificaciones[Posicion + 1]
+    if i == "P_espacios_martes":
+        Martes_P = Especificaciones[Posicion + 1] 
+    if i == "P_espacios_miercoles":
+        Miercoles_P = Especificaciones[Posicion + 1]
+    if i == "P_espacios_jueves":
+        Jueves_P = Especificaciones[Posicion + 1]
+    if i == "P_espacios_viernes":
+        Viernes_P = Especificaciones[Posicion + 1]
+    if i == "P_espacios_sabado":
+        Sabado_P = Especificaciones[Posicion + 1]
+    if i == "P_espacios_domingo":
+        Domingo_P = Especificaciones[Posicion + 1]
+    Posicion += 1
 
 # Función para el módulo de hospedaje
-def modulo_registros():
-    nombreDeCliente = input("Nombre del cliente: ")
-    identificacion = input("Número de identificación: ")
-    pais = input("País: ")
-    canton = input("Cantón: ")
-    distrito = input("Distrito: ")
-    direccion = input("Otras especificaciones de dirección: ")
-    edad = input("Edad: ")
-    formaDePago = input("Forma de pago (efectivo, transferencia, tarjeta de crédito): ")
-
-    # Agregar datos a las listas
-    nombres.append(nombreDeCliente)
-    n_identificaciones.append(identificacion)
-    paises.append(pais)
-    cantones.append(canton)
-    distritos.append(distrito)
-    direcciones.append(direccion)
-    edades.append(edad)
-    formasDePago.append(formaDePago)
-
-    n_acompañantes = int(input("Cuántas personas lo acompañan: "))
-    for i in range(n_acompañantes):
-        print("Datos del acompañante", i + 1)
-        nombre_acompañante = input("Nombre del acompañante: ")
-        identificacion_acompañante = input("Número de identificación: ")
-        edad_acompañante = input("Edad: ")
-
+def modulo_registros(Habitaciones_disponibles_P,Lunes_P,Martes_P,Miercoles_P,Jueves_P,Viernes_P,Sabado_P,Domingo_P):
+        print("1 - Hotel Paraíso, Puntarenas\n2 - Hotel Paraíso, San Carlos\n3 - Hotel Paraíso, Guanacaste")
+        opcion = int(input("Seleccione el Hotel para el registro: "))
+        if opcion == 1:
+            print("Capacidad del hotel: 120 personas\nCantidad de habitaciones: 30 habitaciones\nCantidad de habitaciones disponibles en este momento:", Habitaciones_disponibles_P)
+            print("Número de habitaciones disponibles:\nLunes:", Lunes_P, "\nMartes:", Martes_P, "\nMiercoles:", Miercoles_P, "\nJueves:", Jueves_P, "\nViernes:", Viernes_P, "\nSabado:", Sabado_P, "\nDomingo:", Viernes_P)
+        if opcion == 2:
+            print(" ")
+        if opcion == 3:
+            print(" ")
+        Nombre = input("Nombre del cliente: ")
+        Identificacion = input("Número de identificación: ")
+        Pais = input("País: ")
+        Provincia = input("Provincia: ")
+        Canton = input("Cantón: ")
+        Distrito = input("Distrito: ")
+        Direccion = input("Otras especificaciones de dirección: ")
+        Edad = input("Edad: ")
+        FormaDePago = input("Forma de pago (efectivo, transferencia, tarjeta de crédito): ")
+        n_acompañantes = int(input("¿Cuántas personas lo acompañan? "))
+        for i in range(n_acompañantes):
+            print("Datos del acompañante", i + 1)
+            Datos_acompañantes[i][0] = input("Nombre del acompañante: ")
+            Datos_acompañantes[i][1] = input("Número de identificación: ")
+            Datos_acompañantes[i][2] = input("Edad: ")
 # Función para el módulo de reservas
 def modulo_reservas():
     def calcular_monto_total(hotel, dias, num_huespedes, es_fin_de_semana):
@@ -132,7 +135,7 @@ def menu():
             opcion = int(input("Selecciona una opción: "))
              
             if opcion == 1:
-                modulo_registros()
+                modulo_registros(Habitaciones_disponibles_P,Lunes_P,Martes_P,Miercoles_P,Jueves_P,Viernes_P,Sabado_P,Domingo_P)
             elif opcion == 2:
                 modulo_reservas()
             elif opcion == 3:
@@ -140,8 +143,8 @@ def menu():
             elif opcion == 4:
                 modulo_reportes()
             elif opcion == 5:
-                continuar = 0
                 print("Sesión finalizada.")
+                break
             else:
                 print("Opción inválida. Por favor, elija una opción válida.")
     else:
