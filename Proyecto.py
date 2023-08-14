@@ -10,6 +10,9 @@ Edad = {}
 FormaDePago = {}
 Datos_acompañantes = []
 Días_semana = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sabado","Domingo"]
+Puntarenas = {}
+SanCarlos = {}
+Guanacaste = {}
 horarios_checkin = []
 horarios_checkout = []
 # Datos de los hoteles
@@ -20,32 +23,49 @@ Datos = file.read()
 Especificaciones = Datos.split("&")
 for i in Especificaciones:
     if i == "P,habitaciones":
-        Habitaciones_disponibles_P = Especificaciones[Posicion + 1]
+        Puntarenas[0] = Especificaciones[Posicion + 1]
     if i == "P_espacios_lunes":
-        Lunes_P = Especificaciones[Posicion + 1]
+        Puntarenas[1] = Especificaciones[Posicion + 1]
     if i == "P_espacios_martes":
-        Martes_P = Especificaciones[Posicion + 1] 
+        Puntarenas[2] = Especificaciones[Posicion + 1] 
     if i == "P_espacios_miercoles":
-        Miercoles_P = Especificaciones[Posicion + 1]
+        Puntarenas[3] = Especificaciones[Posicion + 1]
     if i == "P_espacios_jueves":
-        Jueves_P = Especificaciones[Posicion + 1]
+        Puntarenas[4] = Especificaciones[Posicion + 1]
     if i == "P_espacios_viernes":
-        Viernes_P = Especificaciones[Posicion + 1]
+        Puntarenas[5] = Especificaciones[Posicion + 1]
     if i == "P_espacios_sabado":
-        Sabado_P = Especificaciones[Posicion + 1]
+        Puntarenas[6] = Especificaciones[Posicion + 1]
     if i == "P_espacios_domingo":
-        Domingo_P = Especificaciones[Posicion + 1]
+        Puntarenas[7] = Especificaciones[Posicion + 1]
+    if i == "S,habitaciones":
+        SanCarlos[0] = Especificaciones[Posicion + 1]
+    if i == "S_espacios_lunes":
+        SanCarlos[1] = Especificaciones[Posicion + 1]
+    if i == "S_espacios_martes":
+        SanCarlos[2] = Especificaciones[Posicion + 1] 
+    if i == "S_espacios_miercoles":
+        SanCarlos[3] = Especificaciones[Posicion + 1]
+    if i == "S_espacios_jueves":
+        SanCarlos[4] = Especificaciones[Posicion + 1]
+    if i == "S_espacios_viernes":
+        SanCarlos[5] = Especificaciones[Posicion + 1]
+    if i == "S_espacios_sabado":
+        SanCarlos[6] = Especificaciones[Posicion + 1]
+    if i == "S_espacios_domingo":
+        SanCarlos[7] = Especificaciones[Posicion + 1]
     Posicion += 1
 
 # Función para el módulo de hospedaje
-def modulo_registros(Habitaciones_disponibles_P,Lunes_P,Martes_P,Miercoles_P,Jueves_P,Viernes_P,Sabado_P,Domingo_P):
+def modulo_registros(Puntarenas,SanCarlos):
         print("1 - Hotel Paraíso, Puntarenas\n2 - Hotel Paraíso, San Carlos\n3 - Hotel Paraíso, Guanacaste")
         opcion = int(input("Seleccione el Hotel para el registro: "))
         if opcion == 1:
-            print("Capacidad del hotel: 120 personas\nCantidad de habitaciones: 30 habitaciones\nCantidad de habitaciones disponibles en este momento:", Habitaciones_disponibles_P)
-            print("Número de habitaciones disponibles:\nLunes:", Lunes_P, "\nMartes:", Martes_P, "\nMiercoles:", Miercoles_P, "\nJueves:", Jueves_P, "\nViernes:", Viernes_P, "\nSabado:", Sabado_P, "\nDomingo:", Viernes_P)
+            print("Capacidad del hotel: 120 personas\nCantidad de habitaciones: 30 habitaciones\nCantidad de habitaciones disponibles en este momento:", Puntarenas[0])
+            print("Número de habitaciones disponibles:\nLunes:", Puntarenas[1], "\nMartes:", Puntarenas[2], "\nMiercoles:", Puntarenas[3], "\nJueves:", Puntarenas[4], "\nViernes:", Puntarenas[5], "\nSabado:", Puntarenas[6], "\nDomingo:", Puntarenas[7])
         if opcion == 2:
-            print(" ")
+            print("Capacidad del hotel: 60 personas\nCantidad de habitaciones: 30 habitaciones\nCantidad de habitaciones disponibles en este momento:", SanCarlos[0])
+            print("Número de habitaciones disponibles:\nLunes:", SanCarlos[1], "\nMartes:", SanCarlos[2], "\nMiercoles:", SanCarlos[3], "\nJueves:", SanCarlos[4], "\nViernes:", SanCarlos[5], "\nSabado:", SanCarlos[6], "\nDomingo:", SanCarlos[7])
         if opcion == 3:
             print(" ")
         Nombre = input("Nombre del cliente: ")
@@ -135,7 +155,7 @@ def menu():
             opcion = int(input("Selecciona una opción: "))
              
             if opcion == 1:
-                modulo_registros(Habitaciones_disponibles_P,Lunes_P,Martes_P,Miercoles_P,Jueves_P,Viernes_P,Sabado_P,Domingo_P)
+                modulo_registros(Puntarenas,SanCarlos)
             elif opcion == 2:
                 modulo_reservas()
             elif opcion == 3:
