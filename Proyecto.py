@@ -22,22 +22,24 @@ file = open("Hoteles.txt","r")
 Datos = file.read()
 Especificaciones = Datos.split("&")
 for i in Especificaciones:
-    if i == "P,habitaciones":
-        Puntarenas[0] = Especificaciones[Posicion + 1]
-    if i == "S,habitaciones":
-        SanCarlos[0] = Especificaciones[Posicion + 1]
+    if i == "P,capacidad":
+        Puntarenas = Especificaciones[Posicion + 1]
+    if i == "S,capacidad":
+        SanCarlos = Especificaciones[Posicion + 1]
+    if i == "G,capacidad":
+        Guanacaste = Especificaciones[Posicion + 1]
     Posicion += 1
 
 # Función para el módulo de hospedaje
-def modulo_registros(Puntarenas,SanCarlos):
+def modulo_registros(Puntarenas,SanCarlos,Guanacaste):
         print("1 - Hotel Paraíso, Puntarenas\n2 - Hotel Paraíso, San Carlos\n3 - Hotel Paraíso, Guanacaste")
         opcion = int(input("Seleccione el Hotel para el registro: "))
         if opcion == 1:
-            print("Capacidad del hotel: 120 habitaciones\nCantidad de máxima de personas por habitación: 4 habitaciones\nCantidad de habitaciones disponibles en este momento:", Puntarenas[0])
+            print("Capacidad del hotel: 120 habitaciones\nCantidad máxima de personas por habitación: 4 \nCantidad de habitaciones disponibles en este momento:", Puntarenas)
         if opcion == 2:
-            print("Capacidad del hotel: 60 personas\nCantidad de habitaciones: 30 habitaciones\nCantidad de habitaciones disponibles en este momento:", SanCarlos[0])
+            print("Capacidad del hotel: 60 habitaciones\nCantidad máxima de personas por habitación: 2 \nCantidad de habitaciones disponibles en este momento:", SanCarlos)
         if opcion == 3:
-            print(" ")
+            print("Capacidad del hotel: 100 habitaciones\nCantidad máxima de personas por habitación: 4 \nCantidad de habitaciones disponibles en este momento:", Guanacaste)
         Nombre = input("Nombre del cliente: ")
         Identificacion = input("Número de identificación: ")
         Pais = input("País: ")
@@ -125,7 +127,7 @@ def menu():
             opcion = int(input("Selecciona una opción: "))
              
             if opcion == 1:
-                modulo_registros(Puntarenas,SanCarlos)
+                modulo_registros(Puntarenas,SanCarlos,Guanacaste)
             elif opcion == 2:
                 modulo_reservas()
             elif opcion == 3:
