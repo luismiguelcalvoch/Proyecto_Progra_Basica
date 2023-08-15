@@ -13,6 +13,7 @@ Días_semana = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sabado","Domin
 Puntarenas = {}
 SanCarlos = {}
 Guanacaste = {}
+Hotel = {}
 horarios_checkin = []
 horarios_checkout = []
 # Datos de los hoteles
@@ -23,38 +24,69 @@ Datos = file.read()
 Especificaciones = Datos.split("&")
 for i in Especificaciones:
     if i == "P,capacidad":
-        Puntarenas = Especificaciones[Posicion + 1]
+        Puntarenas = int(Especificaciones[Posicion + 1])
     if i == "S,capacidad":
-        SanCarlos = Especificaciones[Posicion + 1]
+        SanCarlos = int(Especificaciones[Posicion + 1])
     if i == "G,capacidad":
-        Guanacaste = Especificaciones[Posicion + 1]
+        Guanacaste = int(Especificaciones[Posicion + 1])
     Posicion += 1
 
 # Función para el módulo de hospedaje
-def modulo_registros(Puntarenas,SanCarlos,Guanacaste):
+def modulo_registros(Puntarenas,SanCarlos,Guanacaste,continuar):
+    while continuar == 1:
         print("1 - Hotel Paraíso, Puntarenas\n2 - Hotel Paraíso, San Carlos\n3 - Hotel Paraíso, Guanacaste")
         opcion = int(input("Seleccione el Hotel para el registro: "))
-        if opcion == 1:
+        if opcion == 1 and Puntarenas > 0:
             print("Capacidad del hotel: 120 habitaciones\nCantidad máxima de personas por habitación: 4 \nCantidad de habitaciones disponibles en este momento:", Puntarenas)
-        if opcion == 2:
+            Hotel = "Puntarenas"
+            continuar = 0
+        elif opcion == 2 and SanCarlos > 0:
             print("Capacidad del hotel: 60 habitaciones\nCantidad máxima de personas por habitación: 2 \nCantidad de habitaciones disponibles en este momento:", SanCarlos)
-        if opcion == 3:
+            Hotel = "San Carlos"
+            continuar = 0
+        elif opcion == 3 and Guanacaste > 0:
             print("Capacidad del hotel: 100 habitaciones\nCantidad máxima de personas por habitación: 4 \nCantidad de habitaciones disponibles en este momento:", Guanacaste)
-        Nombre = input("Nombre del cliente: ")
-        Identificacion = input("Número de identificación: ")
-        Pais = input("País: ")
-        Provincia = input("Provincia: ")
-        Canton = input("Cantón: ")
-        Distrito = input("Distrito: ")
-        Direccion = input("Otras especificaciones de dirección: ")
-        Edad = input("Edad: ")
-        FormaDePago = input("Forma de pago (efectivo, transferencia, tarjeta de crédito): ")
-        n_acompañantes = int(input("¿Cuántas personas lo acompañan? "))
-        for i in range(n_acompañantes):
-            print("Datos del acompañante", i + 1)
-            Datos_acompañantes[i][0] = input("Nombre del acompañante: ")
-            Datos_acompañantes[i][1] = input("Número de identificación: ")
-            Datos_acompañantes[i][2] = input("Edad: ")
+            Hotel = "Guanacaste"
+            continuar = 0
+        else:
+            print("No hay habitaciones disponibles en el hotel que eligió, seleccione otro.")
+    Nombre = input("Nombre del cliente: ")
+    Identificacion = input("Número de identificación: ")
+    Pais = input("País: ")
+    Provincia = input("Provincia: ")
+    Canton = input("Cantón: ")
+    Distrito = input("Distrito: ")
+    Direccion = input("Otras especificaciones de dirección: ")
+    Edad = input("Edad: ")
+    FormaDePago = input("Forma de pago (efectivo, transferencia, tarjeta de crédito): ")
+    n_acompañantes = int(input("¿Cuántas personas lo acompañan? "))
+    for i in range(n_acompañantes):
+        print("Datos del acompañante", i + 1)
+        Datos_acompañantes[i][0] = input("Nombre del acompañante: ")
+        Datos_acompañantes[i][1] = input("Número de identificación: ")
+        Datos_acompañantes[i][2] = input("Edad: ")
+    file = open("Registros.txt","a")
+    file.write("\nNúmero de cliente: ")
+    file.write(Identificacion)
+    file.write("\nNombre del cliente: ")
+    file.write(Nombre)
+    file.write("\nNúmero de identificación: ")
+    file.write(Identificacion)
+    file.write("\nPaís: ")
+    file.write(Pais)
+    file.write("\nProvincia: ")
+    file.write(Provincia)
+    file.write("\nCantón: ")
+    file.write(Canton)
+    file.write("\nDistrito: ")
+    file.write(Distrito)
+    file.write("\nOtras especificaciones de dirección: ")
+    file.write(Direccion)
+    file.write("\nEdad: ")
+    file.write(Edad)
+    file.write("\nForma de pago (efectivo, transferencia, tarjeta de crédito): ")
+    file.write(FormaDePago)
+            
 # Función para el módulo de reservas
 def modulo_reservas():
     def calcular_monto_total(hotel, dias, num_huespedes, es_fin_de_semana):
@@ -127,7 +159,7 @@ def menu():
             opcion = int(input("Selecciona una opción: "))
              
             if opcion == 1:
-                modulo_registros(Puntarenas,SanCarlos,Guanacaste)
+                modulo_registros(Puntarenas,SanCarlos,Guanacaste,continuar)
             elif opcion == 2:
                 modulo_reservas()
             elif opcion == 3:
