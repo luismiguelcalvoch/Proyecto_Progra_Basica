@@ -115,6 +115,7 @@ def modulo_registros(Puntarenas,SanCarlos,Guanacaste,continuar):
         file.write("&Edad:")
         file.write(Identificador)
         file.write(Datos_acompañantes[i][2])
+    file.write("\n")
 # Función para el módulo de reservas
 def modulo_reservas():
     def calcular_monto_total(hotel, dias, num_huespedes, es_fin_de_semana):
