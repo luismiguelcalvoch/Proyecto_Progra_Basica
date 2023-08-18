@@ -5,6 +5,7 @@ Puntarenas = {}
 SanCarlos = {}
 Guanacaste = {}
 Hotel = {}
+Hotel_seleccionado = {}
 continuar = 1
 horarios_checkin = []
 horarios_checkout = []
@@ -641,6 +642,12 @@ while continuar == 1:
              
             if opcion == 1:
                 Hotel,Identificacion = modulo_registros(Puntarenas,SanCarlos,Guanacaste,continuar)
+                if Hotel == "Puntarenas":
+                    Hotel_seleccionado = 1
+                if Hotel == "San Carlos":
+                    Hotel_seleccionado = 2
+                if Hotel == "Guanacaste":
+                    Hotel_seleccionado = 3
             elif opcion == 2:
                 hospedaje()
             elif opcion == 3:
