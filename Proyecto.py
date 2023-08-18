@@ -593,10 +593,6 @@ def consultar_horas_check_in_out(mensaje):
         hora_checkin = int(input())
     return hora_checkin
 
-hospedaje() # esto correría el registro de hospedaje y el checkin. Hay que ver lo de la validación por aparte
-
-
-
 # Función para el módulo de facturación
 def modulo_facturacion():
     # Implementa la lógica del módulo de facturación aquí
