@@ -116,49 +116,9 @@ def modulo_registros(Puntarenas,SanCarlos,Guanacaste,continuar):
         file.write(Identificador)
         file.write(Datos_acompañantes[i][2])
     file.write("\n")
+    file.close()
 # Función para el módulo de reservas
-def modulo_reservas():
-    def calcular_monto_total(hotel, dias, num_huespedes, es_fin_de_semana):
-        tarifa_por_persona = hoteles[hotel]["tarifa_fin_de_semana"] if es_fin_de_semana else hoteles[hotel]["tarifa_semana"]
-        monto_total = tarifa_por_persona * dias * num_huespedes
-        iva = monto_total * 0.13
-        monto_total_con_iva = monto_total + iva
-        return monto_total, iva, monto_total_con_iva
-    
-    def verificar_disponibilidad(hotel, dias, num_huespedes):
-        capacidad_hotel = hoteles[hotel]["capacidad"]
-        max_huespedes_por_habitacion = hoteles[hotel]["max_huespedes_por_habitacion"]
-        total_habitaciones_necesarias = (num_huespedes + max_huespedes_por_habitacion - 1) // max_huespedes_por_habitacion
-        return total_habitaciones_necesarias <= capacidad_hotel
 
-    def reservar_hospedaje():
-        hotel = input("Ingrese el nombre del hotel (Puntarenas, San Carlos, Guanacaste): ")
-        dias = int(input("Ingrese la cantidad de días del hospedaje: "))
-        num_huespedes = int(input("Ingrese la cantidad de huéspedes: "))
-        es_fin_de_semana = input("¿La reserva incluye fin de semana? (Sí/No): ").lower() == "sí"
-
-        if hotel in hoteles:
-            if verificar_disponibilidad(hotel, dias, num_huespedes):
-                monto_total, iva, monto_total_con_iva = calcular_monto_total(hotel, dias, num_huespedes, es_fin_de_semana)
-                print("\nResumen de la reserva:")
-                print(f"Hotel: {hotel}")
-                print(f"Días del hospedaje: {dias}")
-                print(f"Número de huéspedes: {num_huespedes}")
-                print(f"Monto a pagar por persona por noche: ${'%.2f' % (monto_total / (dias * num_huespedes))}")
-                print(f"Monto total: ${'%.2f' % monto_total}")
-                print(f"IVA (13%): ${'%.2f' % iva}")
-                print(f"Monto total con IVA: ${'%.2f' % monto_total_con_iva}")
-            else:
-                print("Lo sentimos, no hay disponibilidad en el hotel para la cantidad de huéspedes.")
-        else:
-            print("El hotel ingresado no está registrado en el sistema.")
-    reservar_hospedaje()
-    
-        
-        
-                
-
-    
 
 # Función para el módulo de facturación
 def modulo_facturacion():
